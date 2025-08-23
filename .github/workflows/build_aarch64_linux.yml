@@ -44,14 +44,14 @@ on:
           - "aarch64-unknown-linux-musl"
           - "x86_64-unknown-linux-musl"
           - "x86_64-pc-windows-msvc"
-      OS:
+      RUNNER:
         type: choice
         description: "目标操作系统"
         required: true
-        default: "linux"
+        default: "ubuntu"
         options:
-          - "linux"
-          - "windows"         
+          - "ubuntu"
+          - "windows"
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
@@ -80,7 +80,7 @@ jobs:
           echo "-----------------------"
           echo "Selected TOOLCHAINS: ${{ github.event.inputs.TOOLCHAINS }}"
           echo "Selected TARGET: ${{ github.event.inputs.TARGET }}"
-          echo "Selected OS: ${{ github.event.inputs.OS }}"
+          echo "Selected RUNNER: ${{ github.event.inputs.RUNNER }}"
           echo "-----------------------"
 
       - name: Determine build strategy
@@ -154,7 +154,7 @@ jobs:
       matrix:
         include:
           # Linux builds
-          - os: ubuntu-latest
+          - os: ${{ github.event.inputs.RUNNER }}-latest
             target: ${{ github.event.inputs.TARGET }}
             cross: true            
     steps:
@@ -284,7 +284,7 @@ jobs:
           echo ""
 
           # Check build status
-          BUILD_STATUS="${{ needs.build-rustfs.result }}"
+          BUILD_STATUS="${{ needs.build-utils.result }}"
 
           echo "📊 Build Results:"
           echo "  📦 All platforms: $BUILD_STATUS"
