@@ -75,6 +75,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Debug Show Selected Inputs
+        run: |
+          echo "-----------------------"
+          echo "Selected TOOLCHAINS: ${{ github.event.inputs.TOOLCHAINS }}"
+          echo "Selected TARGET: ${{ github.event.inputs.TARGET }}"
+          echo "Selected OS: ${{ github.event.inputs.OS }}"
+          echo "-----------------------"
+
       - name: Determine build strategy
         id: check
         run: |
