@@ -1,0 +1,18 @@
+commit a60a4e32d44507af448aa04569086bedc7f211ce
+Author: reigadegr <2722688642@qq.com>
+Date:   Sun Aug 24 06:44:03 2025 +0800
+
+    禁止werror
+
+diff --git a/ripgrep/build.rs b/ripgrep/build.rs
+index db9584b..a3d77a7 100644
+--- a/ripgrep/build.rs
++++ b/ripgrep/build.rs
+@@ -28,7 +28,6 @@ fn set_windows_exe_options() {
+     println!("cargo:rustc-link-arg-bin=rg=/MANIFESTINPUT:{manifest}");
+     // Turn linker warnings into errors. Helps debugging, otherwise the
+     // warnings get squashed (I believe).
+-    println!("cargo:rustc-link-arg-bin=rg=/WX");
+ }
+ 
+ /// Make the current git hash available to the build as the environment
