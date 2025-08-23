@@ -9,7 +9,6 @@ export RUSTFLAGS="
     -C llvm-args=-enable-post-misched \
     -C llvm-args=-enable-dfa-jump-thread \
     -C link-arg=/WX:NO \
-    -C link-args=-Wl,--sort-section=alignment \
     -C link-args=-Wl,-O3,--gc-sections,--as-needed \
     -C link-args=-Wl,-z,relro,-z,now,-x,-z,noexecstack,-s,--strip-all
 " 
