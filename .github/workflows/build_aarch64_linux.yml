@@ -43,6 +43,15 @@ on:
         options:
           - "aarch64-unknown-linux-musl"
           - "x86_64-unknown-linux-musl"
+          - "x86_64-pc-windows-msvc"
+      OS:
+        type: choice
+        description: "目标操作系统"
+        required: true
+        default: "linux"
+        options:
+          - "linux"
+          - "windows"         
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
@@ -140,7 +149,7 @@ jobs:
           - os: ubuntu-latest
             target: ${{ github.event.inputs.TARGET }}
             cross: true
-            platform: linux
+            platform: ${{ github.event.inputs.OS }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -156,16 +165,19 @@ jobs:
           install-cross-tools: ${{ matrix.cross }}
 
       - name: Configure Git
+        shell: bash
         run: |
           git config --global user.name "Numbersf"
           git config --global user.email "263623064@qq.com"
 
       - name: Setup TimeZone
+        if: runner.os == 'Linux'      
         run: |
           sudo -E rm -rf /etc/localtime
           sudo -E ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
       - name: Clone utils sources
+        shell: bash
         run: |
           for i in "starship/starship" \
               "bgreenwell/doxx" \
@@ -182,6 +194,7 @@ jobs:
           done
 
       - name: Optimize upstream mallocator and optmize level
+        shell: bash
         run: |
           rm -rf .git || true
           git clone --depth 1 https://github.com/reigadegr/rust_cli_action self_code
@@ -229,7 +242,10 @@ jobs:
                 wget https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh
                 sh build_stable.sh "${{ matrix.target }}" "$bin_name"
               fi
-
+              
+              if [ "${{ github.event.inputs.OS }}" = "windows" ]; then
+                bin_name=$bin_name.exe
+              fi
               dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name
               rm -rf target
               cd  ..
