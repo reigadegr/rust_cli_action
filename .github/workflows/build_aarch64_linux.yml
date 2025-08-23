@@ -261,6 +261,7 @@ jobs:
               fi
               
               url="https://github.com/reigadegr/rust_cli_action/raw/main/$file"
+              echo "脚本直链: $url"
               curl -L $url -o "$file"
               sh "$file" "${{ matrix.target }}" "$bin_name"
               
