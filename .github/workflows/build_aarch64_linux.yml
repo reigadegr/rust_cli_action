@@ -175,7 +175,7 @@ jobs:
  
               git clone --depth 1 https://github.com/$i
 
-              cd $i
+              cd "$(basename $i)"
               cargo add mimalloc --features no_thp,override
               cd  ..
           done

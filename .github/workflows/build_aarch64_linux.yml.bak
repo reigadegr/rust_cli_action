@@ -138,7 +138,7 @@ jobs:
         include:
           # Linux builds
           - os: ubuntu-latest
-            target: aarch64-unknown-linux-musl
+            target: ${{ github.event.inputs.TARGET }}
             cross: true
             platform: linux
     steps:
