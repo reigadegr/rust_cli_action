@@ -35,11 +35,6 @@ on:
         options:
           - "stable"
           - "nightly"
-      CLIPPY_FIX:
-        type: boolean
-        description: "是否强制性提升代码质量？"
-        required: true
-        default: false
 
 env:
   CARGO_TERM_COLOR: always
@@ -201,7 +196,30 @@ jobs:
                 wget https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh
                 sh build_stable.sh "${{ matrix.target }}"
               fi
-              dd if=target/"${{ matrix.target }}"/release/$i of=../"${{ matrix.target }}"_utils/$i
+
+              case "$i" in
+                  "tree-rs")
+                      bin_name="tree-rs"
+                      ;;
+                  "ripgrep")
+                      bin_name="rg"
+                      ;;
+                  "fd")
+                      bin_name="fd"
+                      ;;
+                  "doxx")
+                      bin_name="doxx"
+                      ;;
+                  "starship")
+                      bin_name="starship"
+                      ;;
+                  *)
+                      echo "未知项目: $i"
+                      exit 1
+                      ;;
+              esac
+
+              dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name
               rm -rf target
               cd  ..
           done
