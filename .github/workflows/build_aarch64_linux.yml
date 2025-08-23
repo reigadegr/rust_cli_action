@@ -195,8 +195,10 @@ jobs:
           for i in "tree-rs" "ripgrep" "fd" "doxx" "starship"; do
               cd $i
               if [ "${{ github.event.inputs.TOOLCHAINS }}" = "nightly" ]; then
+                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh
                 sh build_nightly.sh "${{ matrix.target }}"
               else
+                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh
                 sh build_stable.sh "${{ matrix.target }}"
               fi
               dd if=target/"${{ matrix.target }}"/release/$i of=../"${{ matrix.target }}"_utils/$i

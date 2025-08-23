@@ -195,6 +195,7 @@ jobs:
           for i in "tree-rs" "ripgrep" "fd" "doxx" "starship"; do
               cd $i
               if [ "${{ github.event.inputs.TOOLCHAINS }}" = "nightly" ]; then
+                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh
                 sh build_nightly.sh "${{ matrix.target }}"
               else
                 sh build_stable.sh "${{ matrix.target }}"
@@ -207,8 +208,8 @@ jobs:
       - name: Upload to GitHub artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: "${{ matrix.target }}"_utils
-          path: "${{ matrix.target }}"_utils/*
+          name: ${{ matrix.target }}_utils
+          path: ${{ matrix.target }}_utils/*
           retention-days: 3
 
   # Build summary
