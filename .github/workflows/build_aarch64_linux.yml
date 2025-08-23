@@ -156,8 +156,7 @@ jobs:
           # Linux builds
           - os: ubuntu-latest
             target: ${{ github.event.inputs.TARGET }}
-            cross: true
-            platform: ${{ github.event.inputs.OS }}
+            cross: true            
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
