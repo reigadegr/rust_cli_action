@@ -243,14 +243,16 @@ jobs:
                       ;;
               esac              
               if [ "${{ github.event.inputs.TOOLCHAINS }}" = "nightly" ]; then
-                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh
+                url="https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh"
+                curl -L $url -o "$(basename $url)"
                 sh build_nightly.sh "${{ matrix.target }}" "$bin_name"
               else
-                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh
+                url="https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh"
+                curl -L $url -o "$(basename $url)"
                 sh build_stable.sh "${{ matrix.target }}" "$bin_name"
               fi
               
-              if [ "${{ github.event.inputs.OS }}" = "windows" ]; then
+              if [ "${{ github.event.inputs.RUNNER }}" = "windows" ]; then
                 bin_name=$bin_name.exe
               fi
               dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name
