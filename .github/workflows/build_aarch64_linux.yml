@@ -156,7 +156,7 @@ jobs:
           # Linux builds
           - os: ${{ github.event.inputs.RUNNER }}-latest
             target: ${{ github.event.inputs.TARGET }}
-            cross: true            
+            cross: ${{ github.event.inputs.RUNNER == 'ubuntu' && 'true' || 'false' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -249,19 +249,21 @@ jobs:
                       exit 1
                       ;;
               esac
+              
               export CFLAGS="-Wno-error=date-time"
-              if [ "${{ github.event.inputs.TOOLCHAINS }}" = "nightly" ]; then
-                url="https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh"
-                curl -L $url -o "$(basename $url)"
-                sh build_nightly.sh "${{ matrix.target }}" "$bin_name"
-              else
-                url="https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh"
-                curl -L $url -o "$(basename $url)"
-                sh build_stable.sh "${{ matrix.target }}" "$bin_name"
+              toolchain="${{ github.event.inputs.TOOLCHAINS }}"
+              file="build_"$toolchain".sh"
+              
+              if [ "${{ matrix.cross }}" = "false" ]; then
+                file="build_"$toolchain"_no_cross.sh"
               fi
               
+              url="https://github.com/reigadegr/rust_cli_action/raw/main/$file"
+              curl -L $url -o "$file"
+              sh "$file" "${{ matrix.target }}" "$bin_name"
+              
               if [ "${{ github.event.inputs.RUNNER }}" = "windows" ]; then
-                bin_name=$bin_name.exe
+                  bin_name=$bin_name.exe
               fi
               dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name
               rm -rf target
