@@ -241,7 +241,8 @@ jobs:
                       echo "未知项目: $i"
                       exit 1
                       ;;
-              esac              
+              esac
+              export CFLAGS="-Wno-error=date-time"
               if [ "${{ github.event.inputs.TOOLCHAINS }}" = "nightly" ]; then
                 url="https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh"
                 curl -L $url -o "$(basename $url)"
