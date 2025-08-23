@@ -1,0 +1,24 @@
+commit af0883177a1ddde7a8c2bfea747192089e5e2817
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 12:58:49 2025 +0000
+
+    trew-rs 完全优化
+
+diff --git a/tree-rs/Cargo.toml b/tree-rs/Cargo.toml
+index 67da392..e22ec7e 100644
+--- a/tree-rs/Cargo.toml
++++ b/tree-rs/Cargo.toml
+@@ -20,3 +20,13 @@ term = "1.0"
+ globset = "0.4"
+ anyhow = "1.0.86"
+ mimalloc = { version = "0.1.47", features = ["no_thp", "override"] }
++
++[profile.release]
++overflow-checks = false
++codegen-units = 1
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false

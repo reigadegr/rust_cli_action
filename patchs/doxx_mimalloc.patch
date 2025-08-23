@@ -1,0 +1,20 @@
+commit 8178d31aa576ffc81621c47e4e665336f08c2086
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 11:51:17 2025 +0000
+
+    doxx使用mimalloc
+
+diff --git a/doxx/src/main.rs b/doxx/src/main.rs
+index f66ce6b..5a5b2cb 100644
+--- a/doxx/src/main.rs
++++ b/doxx/src/main.rs
+@@ -89,6 +89,9 @@ enum ConfigCommands {
+     Init,
+ }
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
++
+ #[tokio::main]
+ async fn main() -> Result<()> {
+     let cli = Cli::parse();

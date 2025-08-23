@@ -1,0 +1,23 @@
+commit 40c256b5fa78a91f8e7d09c23dd2ad9fd1983c16
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 11:53:57 2025 +0000
+
+    doxx优化开满
+
+diff --git a/doxx/Cargo.toml b/doxx/Cargo.toml
+index eaef29a..1c903af 100644
+--- a/doxx/Cargo.toml
++++ b/doxx/Cargo.toml
+@@ -64,5 +64,11 @@ mimalloc = { version = "0.1.47", features = ["no_thp", "override"] }
+ 
+ # Release optimizations
+ [profile.release]
++overflow-checks = false
+ codegen-units = 1
+-lto = true
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false

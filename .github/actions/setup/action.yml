@@ -149,12 +149,5 @@ runs:
       if: runner.os == 'Windows'
       uses: ilammy/setup-nasm@v1
       with:
-        version: '2.16.01' 
-                          
-    - name: reinstall self code
-      shell: bash
-      run: |
-        git clone --depth 1 https://github.com/reigadegr/rust_cli_action rust_cli_action_sources
-        cp -rf rust_cli_action_sources/*  .
-        cp -rf rust_cli_action_sources/.*  .
-        rm -rf rust_cli_action_sources
+        version: '2.16.01'
+     

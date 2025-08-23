@@ -1,0 +1,20 @@
+commit 5a4d22f50ccdf768b162d320b837338a57fd3c1e
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 13:00:03 2025 +0000
+
+    tree-rs mimalloc
+
+diff --git a/tree-rs/src/main.rs b/tree-rs/src/main.rs
+index b5db7d5..5d55916 100644
+--- a/tree-rs/src/main.rs
++++ b/tree-rs/src/main.rs
+@@ -78,6 +78,9 @@ impl TryFrom<&Args> for Config {
+     }
+ }
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
++
+ fn main() -> Result<(), Box<dyn Error>> {
+     let args = Args::parse();
+     let config = Config::try_from(&args)?;

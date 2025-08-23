@@ -1,0 +1,21 @@
+commit 234823b0373ff98f876b10dec4c0252650a3b4be
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 12:53:36 2025 +0000
+
+    ripgrep使用mimalloc
+
+diff --git a/ripgrep/crates/core/main.rs b/ripgrep/crates/core/main.rs
+index 64f35ce..19f05ed 100644
+--- a/ripgrep/crates/core/main.rs
++++ b/ripgrep/crates/core/main.rs
+@@ -35,9 +35,8 @@ mod search;
+ //
+ // Moreover, we only do this on 64-bit systems since jemalloc doesn't support
+ // i686.
+-#[cfg(all(target_env = "musl", target_pointer_width = "64"))]
+ #[global_allocator]
+-static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
++static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ 
+ /// Then, as it was, then again it will be.
+ fn main() -> ExitCode {

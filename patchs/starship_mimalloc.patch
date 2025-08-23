@@ -1,0 +1,20 @@
+commit a7c6ee17119f7c07d6e205bcdeeeca7ba5ca3a20
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 12:57:48 2025 +0000
+
+    starship mimalloc
+
+diff --git a/starship/src/main.rs b/starship/src/main.rs
+index 77a502e..ee69635 100644
+--- a/starship/src/main.rs
++++ b/starship/src/main.rs
+@@ -146,6 +146,9 @@ enum Commands {
+     ConfigSchema,
+ }
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
++
+ fn main() {
+     // Configure the current terminal on windows to support ANSI escape sequences.
+     #[cfg(windows)]

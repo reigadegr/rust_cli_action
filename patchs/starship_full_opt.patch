@@ -1,0 +1,26 @@
+commit 9f0d95becef7bf172b672b5b20276e2d9f224119
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 12:56:32 2025 +0000
+
+    starship 完全优化
+
+diff --git a/starship/Cargo.toml b/starship/Cargo.toml
+index f7070d0..a3a661a 100644
+--- a/starship/Cargo.toml
++++ b/starship/Cargo.toml
+@@ -123,9 +123,14 @@ mockall = "0.13.1"
+ tempfile = "3.21.0"
+ 
+ [profile.release]
++overflow-checks = false
+ codegen-units = 1
+-lto = true
++lto = "fat"
++opt-level = 3
+ strip = true
++debug = 0
++debug-assertions = false
++incremental = false
+ 
+ [profile.bench]
+ codegen-units = 16

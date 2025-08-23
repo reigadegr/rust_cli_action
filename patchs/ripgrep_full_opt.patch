@@ -1,0 +1,26 @@
+commit 1f79ce87ef6217bdefb2ec3abc416b4792eaa887
+Author: reigadegr <2722688642@qq.com>
+Date:   Sat Aug 23 12:51:49 2025 +0000
+
+    ripgrep 完全优化
+
+diff --git a/ripgrep/Cargo.toml b/ripgrep/Cargo.toml
+index 567c033..cb9e337 100644
+--- a/ripgrep/Cargo.toml
++++ b/ripgrep/Cargo.toml
+@@ -72,7 +72,14 @@ walkdir = "2"
+ pcre2 = ["grep/pcre2"]
+ 
+ [profile.release]
+-debug = 1
++overflow-checks = false
++codegen-units = 1
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false
+ 
+ [profile.release-lto]
+ inherits = "release"

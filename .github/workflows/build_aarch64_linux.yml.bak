@@ -165,22 +165,24 @@ jobs:
               "sharkdp/fd" \
               "BurntSushi/ripgrep" \
               "sighol/tree-rs"; do
+ 
               git clone --depth 1 https://github.com/$i
+
+              cd $i
+              cargo add mimalloc --features no_thp,override
+              cd  ..
           done
 
-      # - name: Fix upstream bugs
-        # run: |
-          # git init || echo "无需init"
-          # rm -rf target && echo "删除了target" || echo "无需删除"
-          # git add  . && git commit -m "auto commit"
-          # for i in "disable_scanner.patch" \
-            # "use_mimalloc.patch" \
-            # "disable_terminal_color.patch" \
-            # "full_opt.patch"; do
-             # wget https://github.com/reigadegr/rust_cli_action/raw/main/patchs/$i
-             # patch -p1 -F 3 < $i && git add  . && git commit -m "auto commit" || git reset --hard
-             # git clean -df
-          # done
+      - name: Optimize upstream mallocator and optmize level
+        run: |
+          git init || echo "无需init"
+          git clone --depth 1 https://github.com/reigadegr/rust_cli_action self_code
+          git add  . && git commit -m "auto commit" || echo "无需提交"          
+          for i in "self_code/patchs/*.patch"; do
+             i="$(realpath $i)"
+             patch -p1 -F 3 < $i && git add  . && git commit -m "auto commit" || git reset --hard
+             git clean -df
+          done
 
       - name: Build Rust Utils
         shell: bash
@@ -189,13 +191,6 @@ jobs:
           mkdir "${{ matrix.target }}"_utils
           for i in "tree-rs" "ripgrep" "fd" "doxx" "starship"; do
               cd $i
-              if [ "${{ github.event.inputs.TOOLCHAINS }}" = "nightly" ]; then
-                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh
-                sh build_nightly.sh "${{ matrix.target }}"
-              else
-                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh
-                sh build_stable.sh "${{ matrix.target }}"
-              fi
 
               case "$i" in
                   "tree-rs")
@@ -217,7 +212,15 @@ jobs:
                       echo "未知项目: $i"
                       exit 1
                       ;;
-              esac
+              esac              
+              if [ "${{ github.event.inputs.TOOLCHAINS }}" = "nightly" ]; then
+                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_nightly.sh
+                sh build_nightly.sh "${{ matrix.target }}" "$bin_name"
+              else
+                wget https://github.com/reigadegr/rust_cli_action/raw/main/build_stable.sh
+                sh build_stable.sh "${{ matrix.target }}" "$bin_name"
+              fi
+
               dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name
               rm -rf target
               cd  ..
