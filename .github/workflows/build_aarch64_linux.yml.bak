@@ -35,7 +35,14 @@ on:
         options:
           - "stable"
           - "nightly"
-
+      TARGET:
+        type: choice
+        description: "编译的目标三元组"
+        required: true
+        default: "aarch64-unknown-linux-musl"
+        options:
+          - "aarch64-unknown-linux-musl"
+          - "x86_64-unknown-linux-musl"
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
@@ -180,7 +187,7 @@ jobs:
           git add  . && git commit -m "auto commit" || echo "无需提交"          
           for i in "self_code/patchs/*.patch"; do
              i="$(realpath $i)"
-             patch -p1 -F 3 < $i && git add  . && git commit -m "auto commit" || git reset --hard
+             patch -p1 -F 3 < $i && git add  . && git commit -m "auto commit" || git reset --hard && echo "$i 补丁应用失败"
              git clean -df
           done
 
