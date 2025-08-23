@@ -214,7 +214,7 @@ jobs:
   # Build summary
   build-summary:
     name: Build Summary
-    needs: [build-rustfs, build-mc]
+    needs: [build-utils]
     if: always() && needs.build-check.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     steps:
