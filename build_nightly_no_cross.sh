@@ -25,6 +25,4 @@ export CARGO_TERM_COLOR=always
 
 export JEMALLOC_SYS_DISABLE_WARN_ERROR=1
 
-cargo +nightly build -r -p rustfs --bins -Z build-std -Z trim-paths
-
-cp -af ./target/release/rustfs.exe ./"$1"_module/rustfs.exe
+cargo +nightly build -r -Z build-std -Z trim-paths

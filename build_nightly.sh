@@ -25,6 +25,4 @@ export CARGO_TERM_COLOR=always
 
 export JEMALLOC_SYS_DISABLE_WARN_ERROR=1
 
-cargo +nightly zigbuild -r --target "$1" -p rustfs --bins -Z build-std -Z trim-paths
-
-dd if=./target/"$1"/release/rustfs of=./"$1"_module/rustfs
+cargo +nightly zigbuild -r --target "$1" -Z build-std -Z trim-paths
