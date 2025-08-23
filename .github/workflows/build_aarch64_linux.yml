@@ -219,6 +219,8 @@ jobs:
              patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || git reset --hard
              git clean -df
           done
+          
+          sed -i '#/WX#d' ripgrep/build.rs
 
       - name: Build Rust Utils
         shell: bash
