@@ -183,12 +183,12 @@ jobs:
           sudo -E rm -rf /etc/localtime
           sudo -E ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-      - name: Install dependencies (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          choco install git llvm -y --no-progress
-          echo "C:\Program Files\LLVM\bin" >> $GITHUB_PATH
+      # - name: Install dependencies (Windows)
+        # if: runner.os == 'Windows'
+        # shell: pwsh
+        # run: |
+          # choco install git llvm -y --no-progress
+          # echo "C:\Program Files\LLVM\bin" >> $GITHUB_PATH
 
       - name: Clone utils sources
         shell: bash
