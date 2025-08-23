@@ -177,17 +177,19 @@ jobs:
 
               cd "$(basename $i)"
               cargo add mimalloc --features no_thp,override
+              rm -rf .git
               cd  ..
           done
 
       - name: Optimize upstream mallocator and optmize level
         run: |
-          git init || echo "无需init"
+          rm -rf .git || true
           git clone --depth 1 https://github.com/reigadegr/rust_cli_action self_code
-          git add  . && git commit -m "auto commit" || echo "无需提交"          
-          for i in "self_code/patchs/*.patch"; do
-             i="$(realpath $i)"
-             patch -p1 -F 3 < $i && git add  . && git commit -m "auto commit" || git reset --hard && echo "$i 补丁应用失败"
+          rm -rf self_code/.git
+          git init || echo "无需init"
+          git add  . && git commit -m "auto commit" || echo "无需提交"
+          for i in `realpath ./self_code/patchs/*.patch`; do
+             patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || git reset --hard
              git clean -df
           done
 
