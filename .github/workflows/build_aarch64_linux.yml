@@ -187,7 +187,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          choco install git llvm clang -y --no-progress
+          choco install git llvm -y --no-progress
           echo "C:\Program Files\LLVM\bin" >> $GITHUB_PATH
 
       - name: Clone utils sources
