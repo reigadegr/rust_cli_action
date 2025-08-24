@@ -178,7 +178,7 @@ jobs:
           git config --global user.email "263623064@qq.com"
 
       - name: Setup TimeZone
-        if: runner.os == 'Linux'      
+        if: runner.os == 'Linux'
         run: |
           sudo -E rm -rf /etc/localtime
           sudo -E ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -277,6 +277,14 @@ jobs:
           name: ${{ matrix.target }}_utils
           path: ${{ matrix.target }}_utils/*
           retention-days: 3
+
+      - name: See dependencies
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          for %%i in (doxx fd ripgrep starship tree-rs) do (
+            dumpbin /dependents "${{ matrix.target }}"_utils\%%i.exe
+          )
 
   # Build summary
   build-summary:
