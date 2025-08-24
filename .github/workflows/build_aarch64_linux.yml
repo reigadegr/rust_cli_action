@@ -211,7 +211,12 @@ jobs:
               fi
               file="$(find target -name "$bin_name")"
               echo "$(realpath $file)"
-              dd if=$file of=../"${{ matrix.target }}"_utils/$bin_name
+              for i in $file; do
+                if [ -f "../"${{ matrix.target }}"_utils/$bin_name" ]; then
+                    bin_name=$bin_name_$(date +%+s)
+                fi
+                dd if="$i" of=../"${{ matrix.target }}"_utils/$bin_name
+              done
               rm -rf target
               cd  ..
           done
