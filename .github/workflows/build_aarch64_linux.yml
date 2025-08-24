@@ -19,7 +19,6 @@ on:
         options:
           - "aarch64-unknown-linux-musl"
           - "x86_64-unknown-linux-musl"
-          - "x86_64-pc-windows-gnu"
           - "x86_64-pc-windows-msvc"
       RUNNER:
         type: choice
@@ -179,13 +178,8 @@ jobs:
                   bin_name=$bin_name.exe
               fi
               file="$(find target -name "$bin_name")"
-              echo "$(realpath $file)"
-              for i in $file; do
-                if [ -f "../"${{ matrix.target }}"_utils/$bin_name" ]; then
-                    bin_name=$bin_name_$(date +%s)
-                fi
-                dd if="$i" of=../"${{ matrix.target }}"_utils/$bin_name
-              done
+              echo "$(realpath $file)"              
+              dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name            
               rm -rf target
               cd  ..
           done
