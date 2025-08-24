@@ -226,8 +226,9 @@ jobs:
         run: |
           rm -rf ./*/target && echo "删除了target" || echo "无需删除"
           mkdir "${{ matrix.target }}"_utils
+          work_space="$(pwd)"
           for i in "doxx" "fd" "ripgrep" "starship" "tree-rs"; do
-              cd $i
+              cd "$work_space/$i"
 
               case "$i" in
                   "tree-rs")
