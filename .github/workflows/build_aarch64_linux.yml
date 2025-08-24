@@ -272,7 +272,7 @@ jobs:
           done
 
       - name: Upload to GitHub artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: ${{ matrix.target }}_utils
           path: ${{ matrix.target }}_utils/*
