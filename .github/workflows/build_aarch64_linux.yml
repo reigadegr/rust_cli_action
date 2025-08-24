@@ -44,6 +44,7 @@ on:
           - "aarch64-unknown-linux-musl"
           - "x86_64-unknown-linux-musl"
           - "x86_64-pc-windows-gnu"
+          - "x86_64-pc-windows-msvc"
       RUNNER:
         type: choice
         description: "目标操作系统"
@@ -261,7 +262,7 @@ jobs:
               url="https://github.com/reigadegr/rust_cli_action/raw/main/$file"
               echo "脚本直链: $url"
               curl -L $url -o "$file"
-              sh "$file" "${{ matrix.target }}" "$bin_name"
+              sh "$file" "${{ matrix.target }}" "$bin_name" || continue
               
               if [ "${{ github.event.inputs.RUNNER }}" = "windows" ]; then
                   bin_name=$bin_name.exe
