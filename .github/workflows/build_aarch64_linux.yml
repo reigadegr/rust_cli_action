@@ -162,7 +162,7 @@ jobs:
                       ;;
               esac
               
-              export CFLAGS="-Wno-error=date-time"
+              # export CFLAGS="-Wno-error=date-time"
               toolchain="${{ github.event.inputs.TOOLCHAINS }}"
               file="build_"$toolchain".sh"
               
