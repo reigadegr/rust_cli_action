@@ -10,7 +10,7 @@ export RUSTFLAGS="
     -C link-args=-Wl,--sort-section=alignment \
     -C link-args=-Wl,-O3,--gc-sections,--as-needed \
     -C link-args=-Wl,-z,relro,-z,now,-x,-z,noexecstack,-s,--strip-all
-"
+" 
 
 cargo update
 
