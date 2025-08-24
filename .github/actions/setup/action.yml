@@ -132,7 +132,7 @@ runs:
         # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile default -y
         rustup default stable
         rustup component add rust-src llvm-tools-preview
-        rustup target add x86_64-pc-windows-gnu
+        rustup target add "${{ inputs.target }}"
         rustup update
 
     - name: Setup NASM
