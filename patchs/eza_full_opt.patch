@@ -1,0 +1,29 @@
+commit 25f94563eb9fc629808a50fffbff8aab1fcb050a
+Author: reigadegr <2722688642@qq.com>
+Date:   Sun Aug 24 05:20:30 2025 +0000
+
+    eza full_opt
+
+diff --git a/eza/Cargo.toml b/eza/Cargo.toml
+index 5fed552..11e432f 100644
+--- a/eza/Cargo.toml
++++ b/eza/Cargo.toml
+@@ -152,11 +152,14 @@ nix-generated = []
+ 
+ # use LTO for smaller binaries (that take longer to build)
+ [profile.release]
+-lto = true
+-strip = true
+-opt-level = 3
++overflow-checks = false
+ codegen-units = 1
+-panic = 'abort'
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false
+ 
+ [[bench]]
+ name = "my_benchmark"

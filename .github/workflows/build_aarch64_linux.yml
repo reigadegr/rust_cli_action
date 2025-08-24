@@ -108,13 +108,14 @@ jobs:
               "bgreenwell/doxx" \
               "sharkdp/fd" \
               "BurntSushi/ripgrep" \
+              "eza-community/eza" \
               "sighol/tree-rs"; do
  
               git clone --depth 1 https://github.com/$i
 
               cd "$(basename $i)"
               cargo add mimalloc --features no_thp,override
-              rm -rf .git
+              rm -rf .git rust-toolchain.toml || true
               cd  ..
           done
 
@@ -137,7 +138,7 @@ jobs:
           rm -rf ./*/target && echo "删除了target" || echo "无需删除"
           mkdir "${{ matrix.target }}"_utils
           work_space="$(pwd)"
-          for i in "doxx" "fd" "ripgrep" "starship" "tree-rs"; do
+          for i in "doxx" "eza" "fd" "ripgrep" "starship" "tree-rs"; do
               cd "$work_space/$i"
               case "$i" in
                   "tree-rs")
@@ -155,9 +156,12 @@ jobs:
                   "starship")
                       bin_name="starship"
                       ;;
+                  "eza")
+                      bin_name="eza"
+                      ;;     
                   *)
                       echo "未知项目: $i"
-                      exit 1
+                      continue
                       ;;
               esac
               

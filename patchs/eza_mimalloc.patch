@@ -1,0 +1,20 @@
+commit 0ce1e97dc20314380f998510084a84aedb0213ce
+Author: reigadegr <2722688642@qq.com>
+Date:   Sun Aug 24 05:19:12 2025 +0000
+
+    eza mimalloc
+
+diff --git a/eza/src/main.rs b/eza/src/main.rs
+index 15fe464..0c2ced7 100644
+--- a/eza/src/main.rs
++++ b/eza/src/main.rs
+@@ -51,6 +51,9 @@ mod options;
+ mod output;
+ mod theme;
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
++
+ fn main() {
+     #[cfg(unix)]
+     unsafe {
