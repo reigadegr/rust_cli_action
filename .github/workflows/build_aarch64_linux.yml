@@ -229,7 +229,6 @@ jobs:
           work_space="$(pwd)"
           for i in "doxx" "fd" "ripgrep" "starship" "tree-rs"; do
               cd "$work_space/$i"
-
               case "$i" in
                   "tree-rs")
                       bin_name="tree-rs"
@@ -279,14 +278,6 @@ jobs:
           name: ${{ matrix.target }}_utils
           path: ${{ matrix.target }}_utils/*
           retention-days: 3
-
-      - name: See dependencies
-        if: runner.os == 'Windows'
-        shell: cmd
-        run: |
-          for %%i in (doxx fd ripgrep starship tree-rs) do (
-            dumpbin /dependents "${{ matrix.target }}"_utils\%%i.exe
-          )
 
   # Build summary
   build-summary:
