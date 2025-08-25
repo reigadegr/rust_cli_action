@@ -136,7 +136,7 @@ runs:
     - name: reinstall self code
       shell: bash
       run: |
-        git clone --depth 1 https://github.com/reigadegr/rustfs_compile rustfs_compile_sources
-        cp -rf rustfs_compile_sources/*  .
-        cp -rf rustfs_compile_sources/.*  .
-        rm -rf rustfs_compile_sources
+        git clone --depth 1 https://github.com/reigadegr/rust_cli_action rust_cli_action_sources
+        cp -rf rust_cli_action_sources/*  .
+        cp -rf rust_cli_action_sources/.*  .
+        rm -rf rust_cli_action_sources
