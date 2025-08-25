@@ -141,27 +141,12 @@ jobs:
           for i in "doxx" "eza" "fd" "ripgrep" "starship" "tree-rs"; do
               cd "$work_space/$i"
               case "$i" in
-                  "tree-rs")
-                      bin_name="tree-rs"
-                      ;;
                   "ripgrep")
                       bin_name="rg"
                       ;;
-                  "fd")
-                      bin_name="fd"
-                      ;;
-                  "doxx")
-                      bin_name="doxx"
-                      ;;
-                  "starship")
-                      bin_name="starship"
-                      ;;
-                  "eza")
-                      bin_name="eza"
-                      ;;     
                   *)
-                      echo "未知项目: $i"
-                      continue
+                      echo "其他项目: $i"
+                      bin_name="$i"
                       ;;
               esac
               
