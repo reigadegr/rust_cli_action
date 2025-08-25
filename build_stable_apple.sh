@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export RUSTFLAGS="
-    -C lto=fat \
     -C relro-level=none \
     -C code-model=small \
     -C embed-bitcode=yes \
