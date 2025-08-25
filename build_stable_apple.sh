@@ -1,0 +1,20 @@
+#!/bin/bash
+
+export RUSTFLAGS="
+    -C relocation-model=static \
+    -C symbol-mangling-version=v0 \
+    -C llvm-args=-fp-contract=off \
+    -C llvm-args=-enable-misched \
+    -C llvm-args=-enable-post-misched \
+    -C llvm-args=-enable-dfa-jump-thread \
+    -C link-args=-Wl,-dead_strip \
+    -C link-args=-Wl,-S
+" 
+
+cargo update
+
+export CARGO_TERM_COLOR=always
+
+export JEMALLOC_SYS_DISABLE_WARN_ERROR=1
+
+cargo +nightly zigbuild -r --target "$1" --bin "$2" -Z build-std -Z trim-paths
