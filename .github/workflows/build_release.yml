@@ -140,12 +140,9 @@ jobs:
               
               # export CFLAGS="-Wno-error=date-time"
               toolchain="${{ github.event.inputs.TOOLCHAINS }}"
-              file="build_"$toolchain".sh"
-              
-              if [ "${{ matrix.cross }}" = "false" ]; then
-                file="build_"$toolchain"_no_cross.sh"
-              fi
-              
+              platform="${{ contains(github.event.inputs.TARGET, 'windows') && 'windows' || (contains(github.event.inputs.TARGET, 'apple') && 'apple' || 'linux') }}"
+              file="build_"$toolchain"_"$platform".sh"
+
               url="https://github.com/reigadegr/rust_cli_action/raw/main/$file"
               echo "脚本直链: $url"
               curl -L $url -o "$file"
