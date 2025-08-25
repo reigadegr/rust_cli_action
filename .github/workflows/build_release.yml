@@ -20,6 +20,8 @@ on:
           - "aarch64-unknown-linux-musl"
           - "x86_64-unknown-linux-musl"
           - "x86_64-pc-windows-msvc"
+          - "aarch64-apple-darwin"
+          - "x86_64-apple-darwin"
 
 env:
   CARGO_TERM_COLOR: always
@@ -58,9 +60,9 @@ jobs:
       matrix:
         include:
           # Linux builds
-          - os: ${{ contains(github.event.inputs.TARGET, 'windows') && 'windows' || 'ubuntu' }}-latest
+          - os: ${{ contains(github.event.inputs.TARGET, 'windows') && 'windows' || (contains(github.event.inputs.TARGET, 'apple') && 'macos' || 'ubuntu') }}-latest
             target: ${{ github.event.inputs.TARGET }}
-            cross: ${{ contains(github.event.inputs.TARGET, 'windows') && 'false' || 'true' }}
+            cross: ${{ contains(github.event.inputs.TARGET, 'linux') && 'true' || 'false' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
