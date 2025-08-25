@@ -1,4 +1,4 @@
-name: Release Build aarch64-unknown-linux-musl
+name: Release Build
 
 on:
   workflow_dispatch:
