@@ -11,7 +11,7 @@ export RUSTFLAGS="
     -Z function-sections=yes \
     -Z dep-info-omit-d-target \
     -Z flatten-format-args=yes \
-    -Z mir-enable-passes=+Inline \    
+    -Z mir-enable-passes=+Inline \
     -C relro-level=none \
     -C code-model=small \
     -C embed-bitcode=yes \
