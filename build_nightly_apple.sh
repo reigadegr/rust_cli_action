@@ -4,11 +4,20 @@ export RUSTFLAGS="
     -Z validate-mir \
     -Z verify-llvm-ir \
     -Z mir-opt-level=2 \
+    -Z dylib-lto=yes \
+    -Z inline-mir=yes \
     -Z share-generics=yes \
     -Z remap-cwd-prefix=. \
     -Z function-sections=yes \
     -Z dep-info-omit-d-target \
+    -Z flatten-format-args=yes \
+    -Z mir-enable-passes=+Inline \
+    -C lto=fat \
+    -C relro-level=none \
+    -C code-model=small \
+    -C embed-bitcode=yes \
     -C relocation-model=static \
+    -Z mir-enable-passes=+Inline \
     -C symbol-mangling-version=v0 \
     -C llvm-args=-fp-contract=off \
     -C llvm-args=-enable-misched \
