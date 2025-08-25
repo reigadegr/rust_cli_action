@@ -14,7 +14,6 @@ export RUSTFLAGS="
     -Z mir-enable-passes=+Inline \
     -C relro-level=none \
     -C code-model=small \
-    -C embed-bitcode=yes \
     -C default-linker-libraries \
     -C target-feature=+crt-static \
     -Z mir-enable-passes=+Inline \
