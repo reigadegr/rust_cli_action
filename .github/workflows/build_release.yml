@@ -68,7 +68,7 @@ jobs:
           # Linux builds
           - os: ${{ github.event.inputs.RUNNER }}-latest
             target: ${{ github.event.inputs.TARGET }}
-            cross: ${{ github.event.inputs.RUNNER == 'ubuntu' && 'true' || 'false' }}
+            cross: ${{ contains(github.event.inputs.TARGET, 'windows') && 'true' || 'false' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -156,8 +156,9 @@ jobs:
               echo "脚本直链: $url"
               curl -L $url -o "$file"
               sh "$file" "${{ matrix.target }}" "$bin_name" || continue
-              
-              if [ "${{ github.event.inputs.RUNNER }}" = "windows" ]; then
+
+              is_windows="${{ contains(github.event.inputs.TARGET, 'windows') && 'true' || 'false' }}"
+              if [ "$is_windows" = "true" ]; then
                   bin_name=$bin_name.exe
               fi
               file="$(find target -name "$bin_name")"
