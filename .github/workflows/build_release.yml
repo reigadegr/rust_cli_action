@@ -20,14 +20,7 @@ on:
           - "aarch64-unknown-linux-musl"
           - "x86_64-unknown-linux-musl"
           - "x86_64-pc-windows-msvc"
-      RUNNER:
-        type: choice
-        description: "运行器使用的操作系统"
-        required: true
-        default: "ubuntu"
-        options:
-          - "ubuntu"
-          - "windows"
+
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
