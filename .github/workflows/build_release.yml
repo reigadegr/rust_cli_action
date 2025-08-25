@@ -50,7 +50,6 @@ jobs:
           echo "-----------------------"
           echo "Selected TOOLCHAINS: ${{ github.event.inputs.TOOLCHAINS }}"
           echo "Selected TARGET: ${{ github.event.inputs.TARGET }}"
-          echo "Selected RUNNER: ${{ github.event.inputs.RUNNER }}"
           echo "-----------------------"
 
   # Build RustFS binaries
@@ -66,7 +65,7 @@ jobs:
       matrix:
         include:
           # Linux builds
-          - os: ${{ github.event.inputs.RUNNER }}-latest
+          - os: ${{ contains(github.event.inputs.TARGET, 'windows') && 'windows' || 'ubuntu' }}-latest
             target: ${{ github.event.inputs.TARGET }}
             cross: ${{ contains(github.event.inputs.TARGET, 'windows') && 'false' || 'true' }}
     steps:
