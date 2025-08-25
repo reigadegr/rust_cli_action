@@ -86,13 +86,6 @@ runs:
       with:
         version: "25.2.10"
 
-    - name: Install Rust toolchain
-      uses: dtolnay/rust-toolchain@stable
-      with:
-        toolchain: ${{ inputs.rust-version }}
-        targets: ${{ inputs.target }}
-        components: rustfmt, clippy
-
     - name: Install Zig
       if: inputs.install-cross-tools == 'true'
       uses: mlugg/setup-zig@v2
@@ -108,9 +101,9 @@ runs:
       shell: bash
       if: inputs.rust-version == 'nightly'
       run: |
-        # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly --profile default -y
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly --profile minimal -y
         rustup default nightly
-        rustup component add rust-src llvm-tools-preview
+        rustup component add rust-src llvm-tools-preview clippy rustfmt
         if [ "${{ runner.os }}" == 'Linux' ]; then
             rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
             rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-musl
@@ -129,9 +122,9 @@ runs:
       shell: bash
       if: inputs.rust-version == 'stable'
       run: |
-        # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile default -y
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile minimal -y
         rustup default stable
-        rustup component add rust-src llvm-tools-preview
+        rustup component add rust-src llvm-tools-preview clippy rustfmt
         rustup target add "${{ inputs.target }}"
         rustup update
 
