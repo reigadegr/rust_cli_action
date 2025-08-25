@@ -39,12 +39,6 @@ jobs:
   build-check:
     name: Build Strategy Check
     runs-on: ubuntu-latest
-    outputs:
-      should_build: ${{ steps.check.outputs.should_build }}
-      build_type: ${{ steps.check.outputs.build_type }}
-      version: ${{ steps.check.outputs.version }}
-      short_sha: ${{ steps.check.outputs.short_sha }}
-      is_prerelease: ${{ steps.check.outputs.is_prerelease }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
