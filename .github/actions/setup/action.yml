@@ -138,5 +138,5 @@ runs:
       run: |
         git clone --depth 1 https://github.com/reigadegr/rust_cli_action rust_cli_action_sources
         cp -rf rust_cli_action_sources/*  .
-        cp -rf rust_cli_action_sources/.*  .
+        cp -rf rust_cli_action_sources/.*  . || echo "可能是macos，不需要单独cp.*"
         rm -rf rust_cli_action_sources
