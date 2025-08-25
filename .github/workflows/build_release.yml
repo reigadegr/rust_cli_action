@@ -68,7 +68,7 @@ jobs:
           # Linux builds
           - os: ${{ github.event.inputs.RUNNER }}-latest
             target: ${{ github.event.inputs.TARGET }}
-            cross: ${{ contains(github.event.inputs.TARGET, 'windows') && 'true' || 'false' }}
+            cross: ${{ contains(github.event.inputs.TARGET, 'windows') && 'false' || 'true' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
