@@ -17,7 +17,7 @@ index dd54c0a..a73745b 100644
 +overflow-checks = false
  codegen-units = 1
 +lto = "fat"
-+opt-level = 3
++opt-level = 2
 +strip = true
 +debug = 0
 +debug-assertions = false
