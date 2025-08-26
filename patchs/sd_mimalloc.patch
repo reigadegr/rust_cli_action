@@ -1,0 +1,19 @@
+commit 85342d47b6ea9f2da1f70d8ddb119de89db5a1c9
+Author: reigadegr <2722688642@qq.com>
+Date:   Tue Aug 26 17:42:33 2025 +0000
+
+    sd mimalloc
+
+diff --git a/sd/src/main.rs b/sd/src/main.rs
+index 594e796..2fb8a69 100644
+--- a/sd/src/main.rs
++++ b/sd/src/main.rs
+@@ -21,6 +21,8 @@ pub(crate) use self::input::Source;
+ use self::input::{make_mmap, make_mmap_stdin};
+ use self::replacer::Replacer;
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ fn main() {
+     if let Err(e) = try_main() {
+         eprintln!("error: {e}");

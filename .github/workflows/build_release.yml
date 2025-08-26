@@ -99,6 +99,7 @@ jobs:
               "sharkdp/hyperfine" \
               "BurntSushi/ripgrep" \
               "eza-community/eza" \
+              "chmln/sd" \
               "sighol/tree-rs"; do
  
               git clone --depth 1 https://github.com/$i
@@ -127,7 +128,8 @@ jobs:
           rm -rf ./*/target && echo "删除了target" || echo "无需删除"
           work_space="$(pwd)"
           mkdir output
-          for i in "bat" "doxx" "eza" "fd" "hyperfine" "ripgrep" "starship" "tree-rs"; do
+          for i in $(ls); do
+              [ -f "$work_space/$i/Cargo.toml" ] || continue
               cd "$work_space/$i"
               case "$i" in
                   "ripgrep")
