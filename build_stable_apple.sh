@@ -4,7 +4,6 @@ export RUSTFLAGS="
     -C relro-level=none \
     -C code-model=small \
     -C relocation-model=static \
-    -Z mir-enable-passes=+Inline \
     -C symbol-mangling-version=v0 \
     -C llvm-args=-fp-contract=off \
     -C llvm-args=-enable-misched \

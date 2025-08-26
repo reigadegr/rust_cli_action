@@ -1,0 +1,6 @@
+id=rust_cli_utils
+name=Rust cmdline tools
+version=v1.0.0
+versionCode=100
+author=Nigger
+description=Practical command-line tools.
