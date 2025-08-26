@@ -95,7 +95,7 @@ jobs:
           for i in "starship/starship" \
               "bgreenwell/doxx" \
               "sharkdp/fd" \
-              "sharkdp/bat"
+              "sharkdp/bat" \
               "BurntSushi/ripgrep" \
               "eza-community/eza" \
               "sighol/tree-rs"; do
