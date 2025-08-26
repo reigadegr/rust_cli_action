@@ -1,0 +1,18 @@
+commit 615e36f4480bfe02de24219baa9432d6c57cdda0
+Author: reigadegr <2722688642@qq.com>
+Date:   Tue Aug 26 11:38:15 2025 +0000
+
+    bat 使用mimalloc
+
+diff --git a/bat/src/bin/bat/main.rs b/bat/src/bin/bat/main.rs
+index 1a7b905..a2dd799 100644
+--- a/bat/src/bin/bat/main.rs
++++ b/bat/src/bin/bat/main.rs
+@@ -425,6 +425,8 @@ fn run() -> Result<bool> {
+     }
+ }
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ fn main() {
+     let result = run();

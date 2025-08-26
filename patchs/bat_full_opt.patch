@@ -1,0 +1,24 @@
+commit 90967062baf5b584828826e694c73bb7b023eb66
+Author: reigadegr <2722688642@qq.com>
+Date:   Tue Aug 26 11:40:08 2025 +0000
+
+    bat 完全优化
+
+diff --git a/bat/Cargo.toml b/bat/Cargo.toml
+index dd54c0a..a73745b 100644
+--- a/bat/Cargo.toml
++++ b/bat/Cargo.toml
+@@ -125,6 +125,11 @@ optional = true
+ features = ["wrap_help", "cargo"]
+ 
+ [profile.release]
+-lto = true
+-strip = true
++overflow-checks = false
+ codegen-units = 1
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false
