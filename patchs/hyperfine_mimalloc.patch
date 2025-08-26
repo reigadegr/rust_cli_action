@@ -1,0 +1,20 @@
+commit d21c891b84956fdc18d5f48630e9bac34777426b
+Author: reigadegr <2722688642@qq.com>
+Date:   Tue Aug 26 14:12:17 2025 +0000
+
+    hyperfine mimalloc
+
+diff --git a/hyperfine/src/main.rs b/hyperfine/src/main.rs
+index 2a97505..f158447 100644
+--- a/hyperfine/src/main.rs
++++ b/hyperfine/src/main.rs
+@@ -26,6 +26,9 @@ pub mod parameter;
+ pub mod timer;
+ pub mod util;
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
++
+ fn run() -> Result<()> {
+     // Enabled ANSI colors on Windows 10
+     #[cfg(windows)]

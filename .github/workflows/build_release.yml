@@ -96,6 +96,7 @@ jobs:
               "bgreenwell/doxx" \
               "sharkdp/fd" \
               "sharkdp/bat" \
+              "sharkdp/hyperfine" \
               "BurntSushi/ripgrep" \
               "eza-community/eza" \
               "sighol/tree-rs"; do
@@ -110,12 +111,11 @@ jobs:
 
       - name: Optimize upstream mallocator and optmize level
         shell: bash
-        run: |
-          rm -rf .git || true
+        run: |         
           git clone --depth 1 https://github.com/reigadegr/rust_cli_action self_code
-          rm -rf self_code/.git
-          git init || echo "无需init"
-          git add  . && git commit -m "auto commit" || echo "无需提交"
+          rm -rf self_code/.git .git || true
+          git init
+          git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
           for i in `realpath ./self_code/patchs/*.patch`; do
              patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || git reset --hard
              git clean -df
@@ -127,7 +127,7 @@ jobs:
           rm -rf ./*/target && echo "删除了target" || echo "无需删除"
           work_space="$(pwd)"
           mkdir output
-          for i in "bat" "doxx" "eza" "fd" "ripgrep" "starship" "tree-rs"; do
+          for i in "bat" "doxx" "eza" "fd" "hyperfine" "ripgrep" "starship" "tree-rs"; do
               cd "$work_space/$i"
               case "$i" in
                   "ripgrep")

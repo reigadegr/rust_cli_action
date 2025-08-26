@@ -1,0 +1,24 @@
+commit 915889e8d798e1cc27a5b45a53c89f7d6ea6ec02
+Author: reigadegr <2722688642@qq.com>
+Date:   Tue Aug 26 14:10:26 2025 +0000
+
+    hyperfine full_opt
+
+diff --git a/hyperfine/Cargo.toml b/hyperfine/Cargo.toml
+index b1d776a..7f78ed3 100644
+--- a/hyperfine/Cargo.toml
++++ b/hyperfine/Cargo.toml
+@@ -77,6 +77,11 @@ clap = "4.5.23"
+ clap_complete = "4.2.1"
+ 
+ [profile.release]
+-lto = true
+-strip = true
++overflow-checks = false
+ codegen-units = 1
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false
