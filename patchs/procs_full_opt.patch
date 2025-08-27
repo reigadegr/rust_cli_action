@@ -1,0 +1,23 @@
+commit e9ddb372da728a3e2fc67bf2f410ca7b641d05b2
+Author: reigadegr <2722688642@qq.com>
+Date:   Wed Aug 27 00:20:52 2025 +0000
+
+    full opt procs
+
+diff --git a/procs/Cargo.toml b/procs/Cargo.toml
+index 1b30d1c..02f8ebe 100644
+--- a/procs/Cargo.toml
++++ b/procs/Cargo.toml
+@@ -93,5 +93,11 @@ target = "x86_64-unknown-linux-musl"
+ procs = { path = "/usr/bin/procs" }
+ 
+ [profile.release]
+-lto = true
++overflow-checks = false
+ codegen-units = 1
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false

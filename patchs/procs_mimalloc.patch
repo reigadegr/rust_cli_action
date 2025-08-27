@@ -1,0 +1,19 @@
+commit 4bd62cd77a101ed7cc8d9a67aa69ff119a8a1671
+Author: reigadegr <2722688642@qq.com>
+Date:   Wed Aug 27 00:22:57 2025 +0000
+
+    procs mimalloc
+
+diff --git a/procs/src/main.rs b/procs/src/main.rs
+index 2c87a65..35b5129 100644
+--- a/procs/src/main.rs
++++ b/procs/src/main.rs
+@@ -93,6 +93,8 @@ fn check_old_config(s: &str, config: Result<Config, toml::de::Error>) -> Result<
+ // Main
+ // ---------------------------------------------------------------------------------------------------------------------
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ fn main() {
+     let err = Term::stderr();
+ 

@@ -97,6 +97,7 @@ jobs:
               "sharkdp/fd" \
               "sharkdp/bat" \
               "sharkdp/hyperfine" \
+              "dalance/procs" \
               "BurntSushi/ripgrep" \
               "eza-community/eza" \
               "chmln/sd" \
