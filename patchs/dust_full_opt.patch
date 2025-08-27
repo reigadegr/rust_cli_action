@@ -1,0 +1,26 @@
+commit 3ba3dc26b6875721828855845c381f87761580f7
+Author: reigadegr <2722688642@qq.com>
+Date:   Wed Aug 27 09:56:30 2025 +0800
+
+    dust fullopt
+
+diff --git a/dust/Cargo.toml b/dust/Cargo.toml
+index 2c4a912..66ec004 100644
+--- a/dust/Cargo.toml
++++ b/dust/Cargo.toml
+@@ -22,9 +22,14 @@ name = "dust"
+ path = "src/main.rs"
+ 
+ [profile.release]
++overflow-checks = false
+ codegen-units = 1
+-lto = true
++lto = "fat"
++opt-level = 3
+ strip = true
++debug = 0
++debug-assertions = false
++incremental = false
+ 
+ [dependencies]
+ ansi_term = "0.12"

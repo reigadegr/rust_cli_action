@@ -102,13 +102,14 @@ jobs:
               "BurntSushi/ripgrep" \
               "eza-community/eza" \
               "chmln/sd" \
+              "bootandy/dust" \
               "sighol/tree-rs"; do
  
               git clone --depth 1 https://github.com/$i
 
               cd "$(basename $i)"
               rm -rf .git rust-toolchain.toml || true
-              cargo add mimalloc --features no_thp,override              
+              cargo add mimalloc --features no_thp,override
               cd  ..
           done
 

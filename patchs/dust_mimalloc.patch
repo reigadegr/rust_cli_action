@@ -1,0 +1,19 @@
+commit bd40b3fdcb914bd7fd3531d15bbfb2f9a5a0d5b7
+Author: reigadegr <2722688642@qq.com>
+Date:   Wed Aug 27 09:55:04 2025 +0800
+
+    dust mimalloc
+
+diff --git a/dust/src/main.rs b/dust/src/main.rs
+index a59c6fd..f944690 100644
+--- a/dust/src/main.rs
++++ b/dust/src/main.rs
+@@ -113,6 +113,8 @@ fn get_regex_value(maybe_value: Option<&Vec<String>>) -> Vec<Regex> {
+         .collect()
+ }
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ fn main() {
+     let options = Cli::parse();
+     let config = get_config(options.config.as_ref());
