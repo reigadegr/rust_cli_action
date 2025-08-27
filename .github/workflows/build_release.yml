@@ -1,8 +1,5 @@
 name: Release Build
 
-env:
-  TZ: Asia/Shanghai
-
 on:
   workflow_dispatch:
     inputs:
@@ -31,6 +28,7 @@ env:
   RUST_BACKTRACE: 1
   # Optimize build performance
   CARGO_INCREMENTAL: 0
+  TZ: Asia/Shanghai
 
 jobs:
   # Build strategy check - determine build type based on trigger
