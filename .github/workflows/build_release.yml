@@ -120,10 +120,14 @@ jobs:
           rm -rf self_code/.git .git || true
           git init
           git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
+          count=0
           for i in `realpath ./self_code/patchs/*.patch`; do
-             patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || git reset --hard
+             patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" && count=$(($count+1)) || echo "$i应用失败"
+             git reset --hard
              git clean -df
           done
+
+          echo "成功应用$conut个补丁"
 
       - name: Build Rust Utils
         shell: bash
@@ -134,17 +138,16 @@ jobs:
           for i in $(ls); do
               [ -f "$work_space/$i/Cargo.toml" ] || continue
               cd "$work_space/$i"
+              echo "当前编译的项目: $i"
               case "$i" in
                   "ripgrep")
                       bin_name="rg"
                       ;;
                   *)
-                      echo "其他项目: $i"
                       bin_name="$i"
                       ;;
               esac
-              
-              # export CFLAGS="-Wno-error=date-time"
+
               toolchain="${{ github.event.inputs.TOOLCHAINS }}"
               platform="${{ contains(github.event.inputs.TARGET, 'windows') && 'windows' || (contains(github.event.inputs.TARGET, 'apple') && 'apple' || 'linux') }}"
               file="build_"$toolchain"_"$platform".sh"
