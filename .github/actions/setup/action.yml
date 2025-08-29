@@ -123,6 +123,7 @@ runs:
         cargo update
         cargo build -r
         dd if=target/release/cargo-zigbuild of=./cargo-zigbuild
+        rm -rf target
         cp -f cargo-zigbuild ~/.cargo/bin
         ls ~/.cargo/bin
         which cargo-zigbuild
