@@ -90,25 +90,14 @@ runs:
       if: inputs.install-cross-tools == 'true'
       uses: mlugg/setup-zig@v2
 
-    - name: Setup rust nightly musl toolchains
+    - name: Setup rust musl toolchains
       shell: bash
-      if: inputs.rust-version == 'nightly'
       run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly --profile minimal -y
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain "${{ inputs.rust-version }}" --profile minimal -y
         rustup default nightly
         rustup component add rust-src llvm-tools-preview clippy rustfmt
-        rustup component add rust-src --toolchain nightly-"${{ inputs.target }}"
-        rustup target add "${{ inputs.target }}" --toolchain nightly
-        rustup update
-        
-    - name: Setup rust stable musl toolchains
-      shell: bash
-      if: inputs.rust-version == 'stable'
-      run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile minimal -y
-        rustup default stable
-        rustup component add rust-src llvm-tools-preview clippy rustfmt
-        rustup target add "${{ inputs.target }}"
+        rustup component add rust-src --toolchain "${{ inputs.rust-version }}"-"${{ inputs.target }}"
+        rustup target add "${{ inputs.target }}" --toolchain "${{ inputs.rust-version }}"
         rustup update
 
     - name: Install zig
