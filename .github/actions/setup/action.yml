@@ -94,7 +94,7 @@ runs:
       shell: bash
       run: |
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain "${{ inputs.rust-version }}" --profile minimal -y
-        rustup default nightly
+        rustup default "${{ inputs.rust-version }}"
         rustup component add rust-src llvm-tools-preview clippy rustfmt
         rustup component add rust-src --toolchain "${{ inputs.rust-version }}"-"${{ inputs.target }}"
         rustup target add "${{ inputs.target }}" --toolchain "${{ inputs.rust-version }}"
