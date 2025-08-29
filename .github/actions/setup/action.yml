@@ -144,6 +144,7 @@ runs:
         sudo -E chmod +x ~/.cargo/bin/cargo-zigbuild
         ls ~/.cargo/bin
         which cargo-zigbuild || true
+        cd  ..; rm -rf cargo-zigbuild
 
     - name: Setup NASM
       if: runner.os == 'Windows'
