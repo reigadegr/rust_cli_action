@@ -103,6 +103,7 @@ jobs:
               "eza-community/eza" \
               "chmln/sd" \
               "bootandy/dust" \
+              "rust-lang/mdBook" \
               "sighol/tree-rs"; do
  
               git clone --depth 1 https://github.com/$i
@@ -142,6 +143,9 @@ jobs:
               case "$i" in
                   "ripgrep")
                       bin_name="rg"
+                      ;;
+                  "mdBook")
+                      bin_name="mdbook"
                       ;;
                   *)
                       bin_name="$i"

@@ -1,0 +1,23 @@
+commit bb2b349924b3cde498a4cba3cafee01c3e272cc9
+Author: reigadegr <2722688642@qq.com>
+Date:   Fri Aug 29 16:29:06 2025 +0800
+
+    mdbook fullopt
+
+diff --git a/mdBook/Cargo.toml b/mdBook/Cargo.toml
+index 6b8ee2a..d1d3352 100644
+--- a/mdBook/Cargo.toml
++++ b/mdBook/Cargo.toml
+@@ -158,3 +158,12 @@ crate-type = ["bin"]
+ 
+ [lints]
+ workspace = true
++[profile.release]
++overflow-checks = false
++codegen-units = 1
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false

@@ -1,0 +1,19 @@
+commit 769ed76288de993d403e6370fdbe010a77ad386e
+Author: reigadegr <2722688642@qq.com>
+Date:   Fri Aug 29 16:27:18 2025 +0800
+
+    mdbook mimalloc
+
+diff --git a/mdBook/src/main.rs b/mdBook/src/main.rs
+index b35d001..4e3ea6b 100644
+--- a/mdBook/src/main.rs
++++ b/mdBook/src/main.rs
+@@ -23,6 +23,8 @@ mod cmd;
+ 
+ const VERSION: &str = concat!("v", crate_version!());
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ fn main() {
+     init_logger();
+ 
