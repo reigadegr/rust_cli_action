@@ -90,12 +90,6 @@ runs:
       if: inputs.install-cross-tools == 'true'
       uses: mlugg/setup-zig@v2
 
-    - name: Install cargo-zigbuild
-      if: inputs.install-cross-tools == 'true'
-      shell: bash
-      run: |
-        cargo install cargo-zigbuild
-
     - name: Setup rust nightly musl toolchains
       shell: bash
       if: inputs.rust-version == 'nightly'
@@ -116,6 +110,22 @@ runs:
         rustup component add rust-src llvm-tools-preview clippy rustfmt
         rustup target add "${{ inputs.target }}"
         rustup update
+
+    - name: Install cargo-zigbuild
+      if: inputs.install-cross-tools == 'true'
+      shell: bash
+      run: |
+        git clone --depth 1 https://github.com/rust-cross/cargo-zigbuild
+        cd cargo-zigbuild
+        cargo add mimalloc --features no_thp,override,v3
+        wget https://github.com/reigadegr/rust_cli_action/raw/main/patchs/zigbuild_mimalloc.patch
+        patch -p1 -F 3 < zigbuild_mimalloc.patch
+        cargo update
+        cargo build -r
+        dd if=target/release/cargo-zigbuild of=./cargo-zigbuild
+        cp -f cargo-zigbuild ~/.cargo/bin
+        ls ~/.cargo/bin
+        which cargo-zigbuild
 
     - name: Setup NASM
       if: runner.os == 'Windows'
