@@ -124,7 +124,8 @@ runs:
         cargo build -r
         dd if=target/release/cargo-zigbuild of=./cargo-zigbuild
         rm -rf target
-        cp -f cargo-zigbuild ~/.cargo/bin
+        sudo -E cp -af ./cargo-zigbuild ~/.cargo/bin/cargo-zigbuild
+        sudo -E chmod +x ~/.cargo/bin/cargo-zigbuild
         ls ~/.cargo/bin
         which cargo-zigbuild
 
