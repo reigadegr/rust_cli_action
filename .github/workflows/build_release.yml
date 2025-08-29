@@ -198,6 +198,9 @@ jobs:
           esac
 
           rustup default $toolchain
+          rustup component add rust-src llvm-tools-preview
+          rustup component add rust-src --toolchain "$toolchain"-"${{ github.event.inputs.TARGET }}"
+          rustup target add "${{ github.event.inputs.TARGET }}" --toolchain "$toolchain"
           rustup update
 
           for i in $(ls); do
