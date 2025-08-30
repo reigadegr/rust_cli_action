@@ -95,7 +95,7 @@ runs:
       run: |
         # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain "${{ inputs.rust-version }}" --profile minimal -y
         if [ "${{ inputs.rust-version }}" = "nightly" ]; then
-            toolchain="nightly-2025-08-28"
+            toolchain="nightly"
         else
             toolchain="stable"
         fi
