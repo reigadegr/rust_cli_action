@@ -93,12 +93,13 @@ runs:
     - name: Setup rust musl toolchains
       shell: bash
       run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain "${{ inputs.rust-version }}" --profile minimal -y
-        rustup default "${{ inputs.rust-version }}"
+        # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain "${{ inputs.rust-version }}" --profile minimal -y
+        toolchain="${{ inputs.rust-version }}-2025-08-26"
+        rustup default "$toolchain"
         rustup component add rust-src llvm-tools-preview clippy rustfmt
-        rustup component add rust-src --toolchain "${{ inputs.rust-version }}"-"${{ inputs.target }}"
-        rustup target add "${{ inputs.target }}" --toolchain "${{ inputs.rust-version }}"
-        rustup update
+        rustup component add rust-src --toolchain "$toolchain"-"${{ inputs.target }}"
+        rustup target add "${{ inputs.target }}" --toolchain "$toolchain"
+        # rustup update
 
     - name: Install zig
       if: inputs.install-cross-tools == 'true'
