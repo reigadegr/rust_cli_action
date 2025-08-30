@@ -104,8 +104,6 @@ runs:
 
         rustup target add "${{ inputs.target }}" --toolchain "$toolchain"
 
-        rustup update
-        rustup default "$toolchain"
         rustc -Vv
         cargo -V
 
