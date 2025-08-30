@@ -134,7 +134,9 @@ jobs:
         shell: bash
         run: | 
           mkdir ./opt
-          wget -O- https://musl.cc/aarch64-linux-musl-cross.tgz | tar -xz -C ./opt
+          wget -O- https://github.com/reigadegr/rust_cli_action/releases/download/v1.0.0/aarch64-linux-musl-cross.tgz | tar -xz -C ./opt
+          export PATH="$work_space/opt/aarch64-linux-musl-cross/bin:$PATH"
+          which aarch64-linux-musl-ld
 
       - name: Build Rust Utils
         shell: bash
