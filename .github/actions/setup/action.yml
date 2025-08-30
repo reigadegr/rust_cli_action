@@ -102,14 +102,6 @@ runs:
         rustup default "$toolchain"
         rustup component add rust-src llvm-tools-preview clippy rustfmt
 
-        # rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
-        # rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-musl
-        # rustup target add x86_64-unknown-linux-musl --toolchain nightly
-      
-        # rustup component add rust-src --toolchain nightly-aarch64-unknown-linux-gnu
-        # rustup component add rust-src --toolchain nightly-aarch64-unknown-linux-musl
-        # rustup target add aarch64-unknown-linux-musl --toolchain nightly
-
         rustup component add rust-src --toolchain "$toolchain"-"${{ inputs.target }}"
         rustup target add "${{ inputs.target }}" --toolchain "$toolchain"
         
@@ -117,8 +109,8 @@ runs:
         rustup component add rust-src --toolchain "$toolchain"-"${{ inputs.target }}"
       
         rustup component add rust-src --toolchain "$toolchain"-aarch64-unknown-linux-gnu
-        rustup component add rust-src --toolchain "$toolchain"-aarch64-unknown-linux-musl
-        
+        # rustup component add rust-src --toolchain "$toolchain"-aarch64-unknown-linux-musl
+
         rustup update
         rustup default "$toolchain"
         rustc -Vv
