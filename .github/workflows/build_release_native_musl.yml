@@ -134,7 +134,7 @@ jobs:
         shell: bash
         run: | 
           mkdir ./opt
-          wget -qO- https://musl.cc/aarch64-linux-musl-cross.tgz | tar -xz -C ./opt
+          wget -O- https://musl.cc/aarch64-linux-musl-cross.tgz | tar -xz -C ./opt
 
       - name: Build Rust Utils
         shell: bash
