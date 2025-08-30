@@ -10,6 +10,7 @@ on:
         default: 'Release Build aarch64-unknown-linux-musl'
         options:
           - "Release Build"
+          - "Release Build Native Musl"
 
       count:
         description: '最多访问的运行次数'
