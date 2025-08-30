@@ -133,10 +133,10 @@ jobs:
       - name: Install Musl Toolchains
         shell: bash
         run: | 
-          wget https://github.com/reigadegr/rust_cli_action/releases/download/v1.0.0/aarch64-linux-musl-cross.tgz
+          wget https://github.com/reigadegr/rust_cli_action/releases/download/v1.0.0/aarch64-linux-musl-cross.tgz >/dev/null
           tar -xzvf aarch64-linux-musl-cross.tgz || true
-          export PATH="$work_space/aarch64-linux-musl-cross/bin:$PATH"
-          which aarch64-linux-musl-ld
+          # export PATH="$work_space/aarch64-linux-musl-cross/bin:$PATH"
+          # which aarch64-linux-musl-ld
 
       - name: Build Rust Utils
         shell: bash
