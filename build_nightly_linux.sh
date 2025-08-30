@@ -4,6 +4,7 @@ export RUSTFLAGS="
     -Z mir-opt-level=2 \
     -Z dylib-lto=yes \
     -Z inline-mir=yes \
+    -Z external-clangrt \
     -Z fewer-names=yes \
     -Z box-noalias=yes \
     -Z share-generics=yes \
