@@ -94,7 +94,11 @@ runs:
       shell: bash
       run: |
         # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain "${{ inputs.rust-version }}" --profile minimal -y
-        toolchain="${{ inputs.rust-version }}-2025-08-26"
+        if [ "${{ inputs.rust-version }}" = "nightly" ]; then
+            toolchain="nightly-2025-08-26"
+        else
+            toolchain="stable"
+        fi
         rustup default "$toolchain"
         rustup component add rust-src llvm-tools-preview clippy rustfmt
         rustup component add rust-src --toolchain "$toolchain"-"${{ inputs.target }}"
