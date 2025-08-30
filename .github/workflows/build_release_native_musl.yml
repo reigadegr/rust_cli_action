@@ -133,10 +133,9 @@ jobs:
       - name: Install Musl Toolchains
         shell: bash
         run: | 
-          mkdir ./opt
           wget https://github.com/reigadegr/rust_cli_action/releases/download/v1.0.0/aarch64-linux-musl-cross.tgz
-          tar -xzf aarch64-linux-musl-cross.tgz -C ./opt
-          export PATH="$work_space/opt/aarch64-linux-musl-cross/bin:$PATH"
+          tar -xzvf aarch64-linux-musl-cross.tgz
+          export PATH="$work_space/aarch64-linux-musl-cross/bin:$PATH"
           which aarch64-linux-musl-ld
 
       - name: Build Rust Utils
@@ -144,7 +143,7 @@ jobs:
         run: |
           rm -rf ./*/target && echo "删除了target" || echo "无需删除"
           work_space="$(pwd)"
-          export PATH="$work_space/opt/aarch64-linux-musl-cross/bin:$PATH"
+          export PATH="$work_space/aarch64-linux-musl-cross/bin:$PATH"
           mkdir output
           for i in $(ls); do
               [ -f "$work_space/$i/Cargo.toml" ] || continue
