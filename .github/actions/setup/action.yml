@@ -119,6 +119,7 @@ runs:
         rustup component add rust-src --toolchain nightly-aarch64-unknown-linux-musl
         rustup target add aarch64-unknown-linux-musl --toolchain nightly
         rustup update
+        rustup default "$toolchain"
 
     - name: Install zig
       if: inputs.install-cross-tools == 'true'
