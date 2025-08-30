@@ -178,17 +178,8 @@ jobs:
         run: |
           rm -rf ./*/target && echo "删除了target" || echo "无需删除"
           work_space="$(pwd)"
-          rm -rf output || true
-          mkdir output || true
           toolchain="${{ github.event.inputs.TOOLCHAINS }}"
-          case "$toolchain" in
-              "nightly")
-                  toolchain="nightly-2025-08-28"
-                  ;;
-              "stable")
-                  toolchain="nightly"
-                  ;;
-          esac
+          toolchain="nightly-2025-08-28"
 
           rustup default $toolchain
           rustup component add rust-src llvm-tools-preview
