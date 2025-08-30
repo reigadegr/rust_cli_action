@@ -117,6 +117,8 @@ runs:
         
         rustup update
         rustup default "$toolchain"
+        rustc -Vv
+        cargo -V
 
     - name: Install zig
       if: inputs.install-cross-tools == 'true'
