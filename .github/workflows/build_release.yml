@@ -114,10 +114,6 @@ jobs:
               cd "$(basename $i)"
               rm -rf .git rust-toolchain.toml || true
               cargo add mimalloc --features no_thp,override,v3
-              file="use_mimalloc.sh"
-              url="https://github.com/reigadegr/rust_cli_action/raw/main/$file"
-              curl -L $url -o "$file"
-              sh "$file"
               cd  ..
           done
 
@@ -126,23 +122,21 @@ jobs:
         run: |         
           git clone --depth 1 https://github.com/reigadegr/rust_cli_action self_code
           rm -rf self_code/.git .git || true
+          mkdir output
           git init
           git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
-          count=0
           for i in `realpath ./self_code/patchs/*.patch`; do
-             patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" && count=$(($count+1)) || echo "$i应用失败"
+             patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" && || echo "$i应用失败" > output/"$i应用失败.txt"
              git reset --hard
              git clean -df
           done
-
-          echo "成功应用$conut个补丁"
 
       - name: Build Rust Utils
         shell: bash
         run: |
           rm -rf ./*/target && echo "删除了target" || echo "无需删除"
           work_space="$(pwd)"
-          mkdir output
+          mkdir output || true
           for i in $(ls); do
               [ -f "$work_space/$i/Cargo.toml" ] || continue
               rm -rf ~/.cargo/git ~/.cargo/registry ~/.cache || true

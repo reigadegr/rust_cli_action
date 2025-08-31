@@ -1,0 +1,13 @@
+diff --git a/lsd/src/main.rs b/lsd/src/main.rs
+index a8cc165..fae6850 100644
+--- a/lsd/src/main.rs
++++ b/lsd/src/main.rs
+@@ -106,7 +106,8 @@ macro_rules! print_output {
+         }
+     };
+ }
+-
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ fn main() {
+     let cli = Cli::parse_from(wild::args_os());

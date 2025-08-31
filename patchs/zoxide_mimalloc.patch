@@ -1,0 +1,13 @@
+diff --git a/zoxide/src/main.rs b/zoxide/src/main.rs
+index d4ddd6e..28612f4 100644
+--- a/zoxide/src/main.rs
++++ b/zoxide/src/main.rs
+@@ -16,6 +16,8 @@ use clap::Parser;
+ use crate::cmd::{Cmd, Run};
+ use crate::error::SilentExit;
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ pub fn main() -> ExitCode {
+     // Forcibly disable backtraces.
+     unsafe { env::remove_var("RUST_LIB_BACKTRACE") };
