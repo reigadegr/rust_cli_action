@@ -113,8 +113,10 @@ jobs:
               cd "$(basename $i)"
               rm -rf .git rust-toolchain.toml || true
               cargo add mimalloc --features no_thp,override,v3
-              wget https://github.com/reigadegr/rust_cli_action/raw/main/use_mimalloc.sh
-              sh use_mimalloc.sh
+              file="use_mimalloc.sh"
+              url="https://github.com/reigadegr/rust_cli_action/raw/main/$file"
+              curl -L $url -o "$file"
+              sh "$file"
               cd  ..
           done
 

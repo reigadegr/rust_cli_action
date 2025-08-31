@@ -130,7 +130,7 @@ runs:
         git clone --depth 1 https://github.com/rust-cross/cargo-zigbuild
         cd cargo-zigbuild
         cargo add mimalloc --features no_thp,override,v3
-        wget https://github.com/reigadegr/rust_cli_action/raw/main/patchs/zigbuild_mimalloc.patch
+        wget https://github.com/reigadegr/rust_cli_action/raw/main/mimalloc_patchs/zigbuild_mimalloc.patch
         patch -p2 -F 3 < zigbuild_mimalloc.patch
         cargo update
         cargo build -r
