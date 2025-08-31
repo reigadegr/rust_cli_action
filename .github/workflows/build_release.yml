@@ -122,8 +122,9 @@ jobs:
         run: |         
           git clone --depth 1 https://github.com/reigadegr/rust_cli_action self_code
           rm -rf self_code/.git .git || true
-          mkdir output
           git init
+          mkdir -p output || true
+          echo "flag" > output/flag.txt
           git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
           for i in `realpath ./self_code/patchs/*.patch`; do
              patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || echo "$i应用失败" >>output/failure.log
