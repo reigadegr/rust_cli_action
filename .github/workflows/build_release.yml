@@ -126,7 +126,7 @@ jobs:
           git init
           git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
           for i in `realpath ./self_code/patchs/*.patch`; do
-             patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" && || echo "$i应用失败"
+             patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || echo "$i应用失败" >output/"$i"
              git reset --hard
              git clean -df
           done
