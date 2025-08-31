@@ -105,6 +105,7 @@ jobs:
               "imsnif/bandwhich" \
               "chmln/sd" \
               "bootandy/dust" \
+              "ajeetdsouza/zoxide" \
               "rust-lang/mdBook" \
               "sighol/tree-rs"; do
  
