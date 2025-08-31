@@ -10,6 +10,11 @@ for i in $(grep -rn "fn main"); do
     if [ -n "$(echo $i | grep 'use_mimalloc.sh')" ]; then
         continue
     fi
+    
+    if [ -z "$(basename $i | grep '.rs')" ]; then
+        continue
+    fi
+    
     if [ -z "$(echo $i | grep "build.rs")" ]; then
         echo  "#[global_allocator]
 static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;" >> $i
