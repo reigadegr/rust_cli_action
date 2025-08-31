@@ -1,0 +1,13 @@
+diff --git a/bandwhich/src/main.rs b/bandwhich/src/main.rs
+index 8ace86f..13b4321 100644
+--- a/bandwhich/src/main.rs
++++ b/bandwhich/src/main.rs
+@@ -38,6 +38,8 @@ use crate::os::ProcessInfo;
+ 
+ const DISPLAY_DELTA: Duration = Duration::from_millis(1000);
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ fn main() -> eyre::Result<()> {
+     let opts = Opt::parse();
+ 
