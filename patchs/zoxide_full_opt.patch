@@ -1,0 +1,21 @@
+diff --git a/zoxide/Cargo.toml b/zoxide/Cargo.toml
+index 58b0d57..544d3f1 100644
+--- a/zoxide/Cargo.toml
++++ b/zoxide/Cargo.toml
+@@ -58,10 +58,14 @@ default = []
+ nix-dev = []
+ 
+ [profile.release]
++overflow-checks = false
+ codegen-units = 1
+-debug = 0
+-lto = true
++lto = "fat"
++opt-level = 3
+ strip = true
++debug = 0
++debug-assertions = false
++incremental = false
+ 
+ [package.metadata.deb]
+ assets = [
