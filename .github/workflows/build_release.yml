@@ -101,6 +101,8 @@ jobs:
               "dalance/procs" \
               "BurntSushi/ripgrep" \
               "eza-community/eza" \
+              "lsd-rs/lsd" \
+              "imsnif/bandwhich" \
               "chmln/sd" \
               "bootandy/dust" \
               "rust-lang/mdBook" \
@@ -111,6 +113,8 @@ jobs:
               cd "$(basename $i)"
               rm -rf .git rust-toolchain.toml || true
               cargo add mimalloc --features no_thp,override,v3
+              wget https://github.com/reigadegr/rust_cli_action/raw/main/use_mimalloc.sh
+              sh use_mimalloc.sh
               cd  ..
           done
 

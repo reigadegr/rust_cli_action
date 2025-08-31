@@ -1,0 +1,24 @@
+commit b086b27e967c04fea2639b43b0d3943652a85ef0
+Author: reigadegr <2722688642@qq.com>
+Date:   Sun Aug 31 10:56:49 2025 +0800
+
+    lsd fullopt
+
+diff --git a/lsd/Cargo.toml b/lsd/Cargo.toml
+index bd26a1e..3a7b05e 100644
+--- a/lsd/Cargo.toml
++++ b/lsd/Cargo.toml
+@@ -78,7 +78,11 @@ sudo = []
+ no-git = [] # force disabling git even if available by default
+ 
+ [profile.release]
+-lto = true
++overflow-checks = false
+ codegen-units = 1
++lto = "fat"
++opt-level = 3
+ strip = true
+-debug = false
++debug = 0
++debug-assertions = false
++incremental = false
