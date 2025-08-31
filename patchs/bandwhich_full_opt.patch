@@ -1,0 +1,19 @@
+diff --git a/bandwhich/Cargo.toml b/bandwhich/Cargo.toml
+index 29c2a63..b5494a2 100644
+--- a/bandwhich/Cargo.toml
++++ b/bandwhich/Cargo.toml
+@@ -79,8 +79,11 @@ http_req = "0.14.0"
+ zip = "2.4.2"
+ 
+ [profile.release]
++overflow-checks = false
+ codegen-units = 1
+-opt-level = 3
+ lto = "fat"
+-panic = "abort"
+-strip = "symbols"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false
