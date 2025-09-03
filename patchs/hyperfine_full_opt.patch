@@ -17,7 +17,7 @@ index b1d776a..7f78ed3 100644
 +overflow-checks = false
  codegen-units = 1
 +lto = "fat"
-+opt-level = 2
++opt-level = 3
 +strip = true
 +debug = 0
 +debug-assertions = false
