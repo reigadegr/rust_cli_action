@@ -119,6 +119,10 @@ runs:
         curl -L $zig_url -o "$(basename $zig_url)"
         tar -xvf "$(basename $zig_url)" >/dev/null
         zig_elf="$(find ./*/zig)"
+        rm -rf /usr/lib/zig
+        mkdir -p /usr/lib/zig
+        sudo -E cp -arf ./*/lib/* /usr/lib/zig
+        ls /usr/lib/zig
         file $zig_elf
         sudo -E cp -af $zig_elf "$(which zig)"
         zig version
