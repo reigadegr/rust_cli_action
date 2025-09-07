@@ -18,7 +18,7 @@ index 5fed552..11e432f 100644
 +overflow-checks = false
  codegen-units = 1
 -panic = 'abort'
-+lto = "fat"
++lto = "thin"
 +opt-level = 3
 +strip = true
 +debug = 0

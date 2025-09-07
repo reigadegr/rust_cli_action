@@ -15,7 +15,7 @@ index 567c033..cb9e337 100644
 -debug = 1
 +overflow-checks = false
 +codegen-units = 1
-+lto = "fat"
++lto = "thin"
 +opt-level = 3
 +strip = true
 +debug = 0

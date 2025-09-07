@@ -1,0 +1,13 @@
+diff --git a/src/modules/terraform.rs b/src/modules/terraform.rs
+index 8ec5970..f64c3c9 100644
+--- a/starship/src/modules/terraform.rs
++++ b/starship/src/modules/terraform.rs
+@@ -38,7 +38,7 @@ pub fn module<'a>(context: &'a Context) -> Option<Module<'a>> {
+                 "version" => {
+                     let terraform_version = parse_terraform_version(
+                         context
+-                            .exec_cmds_return_first(config.commands.clone())?
++                            .exec_cmds_return_first(&config.commands)?
+                             .stdout
+                             .as_str(),
+                     )?;

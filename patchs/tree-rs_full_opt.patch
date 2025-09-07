@@ -16,7 +16,7 @@ index 67da392..e22ec7e 100644
 +[profile.release]
 +overflow-checks = false
 +codegen-units = 1
-+lto = "fat"
++lto = "thin"
 +opt-level = 3
 +strip = true
 +debug = 0

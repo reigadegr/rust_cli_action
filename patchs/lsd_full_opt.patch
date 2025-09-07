@@ -15,7 +15,7 @@ index bd26a1e..3a7b05e 100644
 -lto = true
 +overflow-checks = false
  codegen-units = 1
-+lto = "fat"
++lto = "thin"
 +opt-level = 3
  strip = true
 -debug = false
