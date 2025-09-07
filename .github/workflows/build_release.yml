@@ -131,10 +131,7 @@ jobs:
           mkdir -p output || true
           echo "flag" > output/flag.txt
           if [ "${{ github.event.inputs.USE_O2 }}" = "true" ]; then
-              url="https://github.com/reigadegr/rust_cli_action/raw/main/self_patchs/use_O2.patch"
-              file="$(basename $url)"
-              curl -L $url -o "$file"
-              patch -p1 -F 3 < $file
+              sed -i 's/+opt-level = 3/+opt-level = 2/g' ./self_code/patchs/*
           fi
           git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
           for i in `realpath ./self_code/patchs/*.patch`; do
