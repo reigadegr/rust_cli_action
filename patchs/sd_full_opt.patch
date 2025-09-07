@@ -14,7 +14,7 @@ index eb8c90c..05427e4 100644
  [profile.release]
 +overflow-checks = false
 +codegen-units = 1
-+lto = "thin"
++lto = "fat"
  opt-level = 3
 -lto = true
  strip = true

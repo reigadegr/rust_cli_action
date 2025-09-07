@@ -15,7 +15,7 @@ index 6b8ee2a..d1d3352 100644
 +[profile.release]
 +overflow-checks = false
 +codegen-units = 1
-+lto = "thin"
++lto = "fat"
 +opt-level = 3
 +strip = true
 +debug = 0
