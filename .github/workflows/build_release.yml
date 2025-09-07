@@ -22,6 +22,11 @@ on:
           - "x86_64-pc-windows-msvc"
           - "aarch64-apple-darwin"
           - "x86_64-apple-darwin"
+      USE_O2:
+        type: boolean
+        description: "是否使用O2编译？(默认O3)"
+        required: true
+        default: false
 
 env:
   CARGO_TERM_COLOR: always
@@ -125,6 +130,12 @@ jobs:
           git init
           mkdir -p output || true
           echo "flag" > output/flag.txt
+          if [ "${{ github.event.inputs.USE_O2 }}" = "true" ]; then
+              url="https://github.com/reigadegr/rust_cli_action/raw/main/self_patchs/use_O2.patch"
+              file="$(basename $url)"
+              curl -L $url -o "$file"
+              patch -p1 -F 3 < $file
+          fi
           git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
           for i in `realpath ./self_code/patchs/*.patch`; do
              patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || echo "$i应用失败" >>output/failure.log
