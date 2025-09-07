@@ -109,7 +109,7 @@ runs:
 
     - name: Install zig
       if: inputs.install-cross-tools == 'true'
-      continue-on-error: true
+      # continue-on-error: true
       shell: bash
       run: |
         platform="${{ contains(inputs.target, 'windows') && 'windows' || (contains(inputs.target, 'apple') && 'macos' || 'linux') }}"        
@@ -119,8 +119,8 @@ runs:
         curl -L $zig_url -o "$(basename $zig_url)"
         tar -xvf "$(basename $zig_url)" >/dev/null
         zig_elf="$(find ./*/zig)"
-        rm -rf /usr/lib/zig
-        mkdir -p /usr/lib/zig
+        sudo -E rm -rf /usr/lib/zig
+        sudo -E mkdir -p /usr/lib/zig
         sudo -E cp -arf ./*/lib/* /usr/lib/zig
         ls /usr/lib/zig
         file $zig_elf
