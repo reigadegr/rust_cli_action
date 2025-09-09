@@ -8,6 +8,10 @@ export RUSTFLAGS="
     -Z box-noalias=yes \
     -Z share-generics=yes \
     -Z remap-cwd-prefix=. \
+    -Z no-leak-check=yes \
+    -Z strict-init-checks=no \
+    -Z randomize-layout=no \
+    -Z extra-const-ub-checks=no \
     -Z mutable-noalias=yes \
     -Z function-sections=yes \
     -Z dep-info-omit-d-target \
@@ -26,7 +30,7 @@ export RUSTFLAGS="
     -C llvm-args=-enable-post-misched \
     -C llvm-args=-enable-dfa-jump-thread \
     -C link-args=-Wl,--sort-section=alignment \
-    -C link-args=-Wl,-O3,--gc-sections,--as-needed \
+    -C link-args=-Wl,-O2,--gc-sections,--as-needed \
     -C link-args=-Wl,-x,-z,noexecstack,-s,--strip-all
 " 
 
