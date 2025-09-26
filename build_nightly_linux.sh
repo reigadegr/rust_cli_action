@@ -5,7 +5,7 @@ export RUSTFLAGS="
     -Z dylib-lto=yes \
     -Z inline-mir=yes \
     -Z fewer-names=yes \
-    -Z box-noalias=yes \-
+    -Z box-noalias=yes \
     -Z share-generics=yes \
     -Z remap-cwd-prefix=. \
     -Z no-leak-check \
