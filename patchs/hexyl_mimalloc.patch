@@ -1,0 +1,14 @@
+diff --git a/hexyl/src/main.rs b/hexyl/src/main.rs
+index 8ae912c..f99dec3 100644
+--- a/hexyl/src/main.rs
++++ b/hexyl/src/main.rs
+@@ -468,6 +468,9 @@ fn run() -> Result<()> {
+     Ok(())
+ }
+ 
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
++
+ fn main() {
+     let result = run();
+ 

@@ -112,6 +112,7 @@ jobs:
               "bootandy/dust" \
               "ajeetdsouza/zoxide" \
               "rust-lang/mdBook" \
+              "sharkdp/hexyl" \
               "sighol/tree-rs"; do
  
               git clone --depth 1 https://github.com/$i
