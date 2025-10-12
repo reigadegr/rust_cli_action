@@ -1,11 +1,11 @@
 #!/bin/bash
 
 export RUSTFLAGS="
-    -C relro-level=none \
-    -C code-model=small \
-    -C linker-plugin-lto=no \
-    -C default-linker-libraries \
-    -C relocation-model=static \
+    -C relro-level=none
+    -C code-model=small
+    -C linker-plugin-lto=no
+    -C default-linker-libraries
+    -C relocation-model=static
     -C symbol-mangling-version=v0
 "
 
