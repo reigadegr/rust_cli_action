@@ -16,5 +16,5 @@ export CARGO_TERM_COLOR=always
 
 export JEMALLOC_SYS_DISABLE_WARN_ERROR=1
 
-cargo +stable build -r --target "$1" --bin "$2" --all-features
+cargo +stable build -r --target "$1" --bin "$2"
 
