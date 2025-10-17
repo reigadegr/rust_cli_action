@@ -141,6 +141,27 @@ jobs:
              git clean -df
           done
 
+      - name: "⚙️ Reset flags"
+        shell: bash
+        run: |
+          work_space="$(pwd)"
+          for i in $(ls); do
+              [ -f "$work_space/$i/Cargo.toml" ] || continue
+              rm -rf .cargo/ || echo "无需删除目录"
+              mkdir -p .cargo/
+              curl -L https://github.com/reigadegr/zed_action/raw/main/.cargo/config.toml -o .cargo/config.toml
+              case "$i" in
+                  "doxx")
+                      sed -i 's/opt-level = 3/opt-level = 2/g' .cargo/config.toml
+                      ;;
+                  *)
+                      if [ "${{ github.event.inputs.USE_O2 }}" = "true" ]; then
+                          sed -i 's/+opt-level = 3/+opt-level = 2/g' .cargo/config.toml
+                      fi
+                      ;;
+              esac
+          done
+
       - name: Build Rust Utils
         shell: bash
         run: |
@@ -149,9 +170,6 @@ jobs:
           mkdir output || true
           for i in $(ls); do
               [ -f "$work_space/$i/Cargo.toml" ] || continue
-              rm -rf .cargo/ || echo "无需删除目录"
-              mkdir -p .cargo/
-              curl -L https://github.com/reigadegr/rust_cli_action/raw/main/.cargo/config.toml -o .cargo/config.toml
               rm -rf ~/.cargo/git ~/.cargo/registry ~/.cache || true
               cd "$work_space/$i"
               echo "当前编译的项目: $i"
