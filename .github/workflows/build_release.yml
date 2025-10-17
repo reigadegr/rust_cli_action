@@ -151,7 +151,7 @@ jobs:
               mkdir -p .cargo/
               curl -L https://github.com/reigadegr/zed_action/raw/main/.cargo/config.toml -o .cargo/config.toml
               case "$i" in
-                  "doxx")
+                  "bat")
                       sed -i 's/opt-level = 3/opt-level = 2/g' .cargo/config.toml
                       ;;
                   *)
