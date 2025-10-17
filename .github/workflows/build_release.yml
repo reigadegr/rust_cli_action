@@ -151,7 +151,7 @@ jobs:
               [ -f "$work_space/$i/Cargo.toml" ] || continue
               rm -rf .cargo/ || echo "无需删除目录"
               mkdir -p .cargo/
-              curl -L https://github.com/reigadegr/zed_action/raw/main/.cargo/config.toml -o .cargo/config.toml
+              curl -L https://github.com/reigadegr/rust_cli_action/raw/main/.cargo/config.toml -o .cargo/config.toml
               rm -rf ~/.cargo/git ~/.cargo/registry ~/.cache || true
               cd "$work_space/$i"
               echo "当前编译的项目: $i"
