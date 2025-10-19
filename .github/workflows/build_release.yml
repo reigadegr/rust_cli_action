@@ -147,6 +147,7 @@ jobs:
           work_space="$(pwd)"
           for i in $(ls); do
               [ -f "$work_space/$i/Cargo.toml" ] || continue
+              cd $i
               rm -rf .cargo/ || echo "无需删除目录"
               mkdir -p .cargo/
               curl -L https://github.com/reigadegr/zed_action/raw/main/.cargo/config.toml -o .cargo/config.toml
@@ -160,6 +161,7 @@ jobs:
                       fi
                       ;;
               esac
+              cd  ..
           done
 
       - name: Build Rust Utils
