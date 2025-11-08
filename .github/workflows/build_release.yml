@@ -157,7 +157,7 @@ jobs:
                       ;;
                   *)
                       if [ "${{ github.event.inputs.USE_O2 }}" = "true" ]; then
-                          sed -i 's/+opt-level = 3/+opt-level = 2/g' .cargo/config.toml
+                          sed -i 's/opt-level = 3/opt-level = 2/g' .cargo/config.toml
                       fi
                       ;;
               esac
