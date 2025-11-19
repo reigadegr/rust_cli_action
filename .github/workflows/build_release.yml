@@ -22,9 +22,18 @@ on:
           - "x86_64-pc-windows-msvc"
           - "aarch64-apple-darwin"
           - "x86_64-apple-darwin"
+      CONFIG:
+        type: choice
+        description: "使用的配置文件"
+        required: true
+        default: "config_micro_opt.toml"
+        options:
+          - "config_full_opt.toml"
+          - "config_debug.toml"
+          - "config_micro_opt.toml"
       USE_O2:
         type: boolean
-        description: "是否使用O2编译？(默认O3)"
+        description: "是否强制使用O2编译？"
         required: true
         default: false
 
@@ -150,7 +159,7 @@ jobs:
               cd $i
               rm -rf .cargo/ || echo "无需删除目录"
               mkdir -p .cargo/
-              curl -L https://github.com/reigadegr/rust_cli_action/raw/main/.cargo/config.toml -o .cargo/config.toml
+              curl -L https://github.com/reigadegr/zed_action/raw/main/.cargo/${{ github.event.inputs.CONFIG }} -o .cargo/config.toml
               case "$i" in
                   "bat")
                       sed -i 's/opt-level = 3/opt-level = 2/g' .cargo/config.toml
